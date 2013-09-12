@@ -46,18 +46,6 @@ namespace BulkLoop
             //Console.WriteLine(noord[1][1]);
             InitializeComponent();
         }
-        //private void InitializeComponentSpeleditor()
-        //{
-        //    this.SuspendLayout();
-        //    // 
-        //    // speleditor
-        //    // 
-        //    this.ClientSize = new System.Drawing.Size(284, 262);
-        //    this.Name = "speleditor";
-        //    this.Load += new System.EventHandler(this.speleditor_Load);
-        //    this.ResumeLayout(false);
-
-        //}
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -70,7 +58,9 @@ namespace BulkLoop
                 memo.Text += "\r\nfilenaam: ";
                 memo.Text += filnam;
 
+                // hallo
                 string line;
+                // dag
                 bool skip = false;
                 int start, stop, num, len;
 
@@ -95,9 +85,9 @@ namespace BulkLoop
                             memo.Text += len;
                             num=0;
                             for(t=0; t<len; t++)
-                                num= 10*nummer+(unsigned char)((buf[t]-'0'));
+                                num= 10*nummer+(int)(buf[t]-'0');
 //                            cond_act.spelnummer=nummer;
-  }                            // Console.WriteLine(Convert.ToInt32(leessubstring(line)));
+                             // Console.WriteLine(Convert.ToInt32(leessubstring(line)));
                         }
                         else memo.Text += "BOARD ontbreekt";
                     }
@@ -105,29 +95,15 @@ namespace BulkLoop
                 file.Close();
             }
 
-        }
         int tokenlengte(String str, int strt)
         {
             int t=strt;
             while(str[t] != '"' && t<81) t++;
             return(t-strt);
         }
+        
 
-void registreer_spelnummer(char* buf, int len)
-{
-  int nummer, t;
-
-  nummer=0;
-//  commenttxt("\r\nstring: ");
-//  commenttxt(buf);
-  for(t=0; t<len; t++)
-  {
-    nummer= 10*nummer+(unsigned char)((buf[t]-'0'));
-    cond_act.spelnummer=nummer;
-  }
-//  comment("\r\nspelnummer: ",nummer);
-}
-        private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
+     private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
 
         }
