@@ -62,7 +62,7 @@ namespace BulkLoop
                 string line;
                 // dag
                 bool skip = false;
-                int start, stop, num, len;
+                int start, stop, num, len, t;
 
                 // Read the file and display it line by line.
                 System.IO.StreamReader file = new System.IO.StreamReader(filnam);
@@ -78,16 +78,15 @@ namespace BulkLoop
                         memo.Text += "[ gevonden";
                         if (String.Compare(line, 1, "BOARD ", 0, 6) == 0)
                         {
-                            memo.Text += "BOARD gevonden"; int t = 0;
-                            while (line[t] != '"' && t < 80) t++;
-                            start = t + 1; t++;
-                            len = tokenlengte(line, start);
-                            memo.Text += len;
-                            num = 0;
-                            for (t = 0; t < len; t++)
-                                num = 10 * num + (int)(buf[t] - '0');
+                            String token = geeftoken(line);
+                            memo.Text += token;
+                            //registreerspelnummer(line,start 
+                            num = 0; t = 0;
+                            memo.Text += "\r\n " + token.Length;
+                            for (t = 0; t < token.Length; t++)
+                                num = 10 * num + (int)(token[t] - '0');
+                            memo.Text += "\r\n" + num;
                             //                            cond_act.spelnummer=nummer;
-                            // Console.WriteLine(Convert.ToInt32(leessubstring(line)));
                         }
                         else memo.Text += "BOARD ontbreekt";
                     }
@@ -95,14 +94,25 @@ namespace BulkLoop
                 file.Close();
             }
         }
-
-        int tokenlengte(String str, int strt)
+        String geeftoken(String str)
         {
-            int t=strt;
+            int t=0;
             while(str[t] != '"' && t<81) t++;
-            return(t-strt);
+            String result = ""; t++;
+            while(str[t] != '"' && t<81)
+            {
+                memo.Text += "\r\n "+t;
+                memo.Text += " "+str.Substring(t, 1);
+                String.Concat(result,str.Substring(t,1));
+                t++;
+            }
+            memo.Text += "\r\n " + result;
+            return result;
         }
-        
+
+        void registreerspelnummer(String str)
+            {
+            }
 
      private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
