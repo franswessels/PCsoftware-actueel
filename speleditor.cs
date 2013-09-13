@@ -71,29 +71,30 @@ namespace BulkLoop
                     memo.Text += "\r\n";
                     memo.Text += line;
                     if (line[0] == '{') skip = true;
-//                    if (line[0] == '}') skip = false;
-                        memo.Text += "\r\n"+skip;
+                    //                    if (line[0] == '}') skip = false;
+                    memo.Text += "\r\n" + skip;
                     if (line[0] == '[' && !skip)
                     {
                         memo.Text += "[ gevonden";
                         if (String.Compare(line, 1, "BOARD ", 0, 6) == 0)
                         {
                             memo.Text += "BOARD gevonden"; int t = 0;
-                            while(line[t] != '"' && t<80) t++;
-                            start = t+1; t++;
-                            len=tokenlengte(line,start);
+                            while (line[t] != '"' && t < 80) t++;
+                            start = t + 1; t++;
+                            len = tokenlengte(line, start);
                             memo.Text += len;
-                            num=0;
-                            for(t=0; t<len; t++)
-                                num= 10*nummer+(int)(buf[t]-'0');
-//                            cond_act.spelnummer=nummer;
-                             // Console.WriteLine(Convert.ToInt32(leessubstring(line)));
+                            num = 0;
+                            for (t = 0; t < len; t++)
+                                num = 10 * num + (int)(buf[t] - '0');
+                            //                            cond_act.spelnummer=nummer;
+                            // Console.WriteLine(Convert.ToInt32(leessubstring(line)));
                         }
                         else memo.Text += "BOARD ontbreekt";
                     }
                 }
                 file.Close();
             }
+        }
 
         int tokenlengte(String str, int strt)
         {
