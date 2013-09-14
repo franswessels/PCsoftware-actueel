@@ -68,27 +68,35 @@ namespace BulkLoop
                 System.IO.StreamReader file = new System.IO.StreamReader(filnam);
                 while ((line = file.ReadLine()) != null)
                 {
-                    memo.Text += "\r\n";
-                    memo.Text += line;
+//                    memo.Text += "\r\n";
+//                    memo.Text += line;
                     if (line[0] == '{') skip = true;
                     //                    if (line[0] == '}') skip = false;
-                    memo.Text += "\r\n" + skip;
                     if (line[0] == '[' && !skip)
                     {
-                        memo.Text += "[ gevonden";
                         if (String.Compare(line, 1, "BOARD ", 0, 6) == 0)
                         {
                             String token = geeftoken(line);
-                            memo.Text += token;
-                            //registreerspelnummer(line,start 
-                            num = 0; t = 0;
-                            memo.Text += "\r\n " + token.Length;
-                            for (t = 0; t < token.Length; t++)
-                                num = 10 * num + (int)(token[t] - '0');
-                            memo.Text += "\r\n" + num;
-                            //                            cond_act.spelnummer=nummer;
+                            memo.Text += "\r\n " + token;
+                            registreerspelnummer(token); 
                         }
-                        else memo.Text += "BOARD ontbreekt";
+                        if (String.Compare(line, 1, "DEALER ", 0, 7) == 0)
+                        {
+                            String token = geeftoken(line);
+                            memo.Text += "\r\n "+token;
+                            registreerstarter(token);
+                        }
+                        if (String.Compare(line, 1, "VULNERABLE ", 0, 11) == 0)
+                        {
+                            String token = geeftoken(line);
+                            memo.Text += "\r\n " + token;
+                            registreerkwetsbaarheid(token);
+                        }
+                        if (String.Compare(line, 1, "DEAL ", 0, 5) == 0)
+                        {
+                            String token = geeftoken(line);
+                            memo.Text += "\r\n " + token;
+                        }
                     }
                 }
                 file.Close();
@@ -101,20 +109,65 @@ namespace BulkLoop
             String result = ""; t++;
             while(str[t] != '"' && t<81)
             {
-                memo.Text += "\r\n "+t;
-                memo.Text += " "+str.Substring(t, 1);
-                String.Concat(result,str.Substring(t,1));
+                result = String.Concat(result,str.Substring(t,1));
                 t++;
             }
-            memo.Text += "\r\n " + result;
             return result;
         }
 
         void registreerspelnummer(String str)
             {
+                int num = 0; int t = 0; ;
+                for (t = 0; t < str.Length; t++)
+                    num = 10 * num + (int)(str[t] - '0');
+                memo.Text += "\r\n Spelnummer is " + num;
+                //                            cond_act.spelnummer=nummer;
+            }
+        void registreerstarter(String str)
+        {
+            int kar;
+
+            kar = str[0];
+            if (kar == 'N') kar = 0;
+            if (kar == 'E') kar = 1;
+            if (kar == 'S') kar = 2;
+            if (kar == 'W') kar = 3;
+            memo.Text += "\r\n Dealer is " + kar;
+//            cond_act.starter = kar;
+//            actafsp.start = kar;
+        }
+        void registreerkwetsbaarheid(String str)
+        {
+//    cond_act.nz_kwetsbaar=false;
+//    cond_act.ow_kwetsbaar=false;
+            if(String.Compare(str,"NONE")==0 ||String.Compare(str,"LOVE")==0 ||String.Compare(str,"-")==0)
+            {
+                memo.Text += "\r\nniemand kwetsbaar";
             }
 
-     private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
+            if(String.Compare(str,"NS")==0 )
+            {
+//                cond_act.nz_kwetsbaar=true;
+                memo.Text += "\r\nNS kwetsbaar";
+            }
+
+            if(String.Compare(str,"EW")==0 )
+            {
+//                cond_act.ow_kwetsbaar=true;
+                memo.Text += "\r\nEW kwetsbaar";
+            }
+
+            if(String.Compare(str,"ALL")==0 ||String.Compare(str,"BOTH")==0)
+            {
+//                cond_act.nz_kwetsbaar=true;
+//                cond_act.ow_kwetsbaar=true;
+                memo.Text += "\r\nallen kwetsbaar";
+            }
+        }
+        
+        
+        
+        private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
 
         }
