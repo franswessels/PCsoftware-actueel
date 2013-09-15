@@ -69,27 +69,27 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.newToolStripMenuItem.Text = "new";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.openToolStripMenuItem.Text = "open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.saveToolStripMenuItem.Text = "save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.saveAsToolStripMenuItem.Text = "save as";
             // 
             // transportenToolStripMenuItem
@@ -104,13 +104,13 @@
             // spelNaarBMToolStripMenuItem
             // 
             this.spelNaarBMToolStripMenuItem.Name = "spelNaarBMToolStripMenuItem";
-            this.spelNaarBMToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.spelNaarBMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.spelNaarBMToolStripMenuItem.Text = "spel naar BM";
             // 
             // spelVanBMToolStripMenuItem
             // 
             this.spelVanBMToolStripMenuItem.Name = "spelVanBMToolStripMenuItem";
-            this.spelVanBMToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.spelVanBMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.spelVanBMToolStripMenuItem.Text = "spel van BM";
             // 
             // bMactieToolStripMenuItem
@@ -124,8 +124,9 @@
             // sorteerToolStripMenuItem
             // 
             this.sorteerToolStripMenuItem.Name = "sorteerToolStripMenuItem";
-            this.sorteerToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.sorteerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sorteerToolStripMenuItem.Text = "sorteer";
+            this.sorteerToolStripMenuItem.Click += new System.EventHandler(this.sorteerToolStripMenuItem_Click);
             // 
             // memo
             // 
