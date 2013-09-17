@@ -104,13 +104,13 @@
             // spelNaarBMToolStripMenuItem
             // 
             this.spelNaarBMToolStripMenuItem.Name = "spelNaarBMToolStripMenuItem";
-            this.spelNaarBMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.spelNaarBMToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.spelNaarBMToolStripMenuItem.Text = "spel naar BM";
             // 
             // spelVanBMToolStripMenuItem
             // 
             this.spelVanBMToolStripMenuItem.Name = "spelVanBMToolStripMenuItem";
-            this.spelVanBMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.spelVanBMToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.spelVanBMToolStripMenuItem.Text = "spel van BM";
             // 
             // bMactieToolStripMenuItem
@@ -124,7 +124,7 @@
             // sorteerToolStripMenuItem
             // 
             this.sorteerToolStripMenuItem.Name = "sorteerToolStripMenuItem";
-            this.sorteerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sorteerToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.sorteerToolStripMenuItem.Text = "sorteer";
             this.sorteerToolStripMenuItem.Click += new System.EventHandler(this.sorteerToolStripMenuItem_Click);
             // 
@@ -133,7 +133,7 @@
             this.memo.Location = new System.Drawing.Point(115, 36);
             this.memo.Multiline = true;
             this.memo.Name = "memo";
-            this.memo.Size = new System.Drawing.Size(506, 200);
+            this.memo.Size = new System.Drawing.Size(506, 523);
             this.memo.TabIndex = 1;
             this.memo.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -142,7 +142,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ClientSize = new System.Drawing.Size(937, 474);
+            this.ClientSize = new System.Drawing.Size(937, 571);
             this.ControlBox = false;
             this.Controls.Add(this.memo);
             this.Controls.Add(this.menuStrip1);

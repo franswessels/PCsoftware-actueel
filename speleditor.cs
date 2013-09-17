@@ -173,7 +173,8 @@ namespace BulkLoop
         void registreerverdeling(String str)
         {
             String refer = "NESW";
-            String[] tokens=new String[4];
+            String[] tokens = new String[4];
+            String hand;
             byte sr = (byte)refer.IndexOf(str[0],0,refer.Length);
             int p = 0;
             memo.Text += "\r\n startrichting is " + sr;
@@ -188,10 +189,29 @@ namespace BulkLoop
                 }
                 memo.Text += "\r\n test: " + tokens[t];
             }
-
+            for (int t = 0; t < 4; t++)     // vier windrichtingen
+            {
+                hand = String.Copy(tokens[t]);
+                memo.Text += "\r\n " + hand;
+                p = 0;
+                int wr = 0;
+                int num = 0;
+                char kar;
+                while(wr < 4)  // vier kleuren
+                {
+                    while (hand[p] != '.' && p < 13)
+                    {
+                        kar = hand[p];
+                        num = num + (4-wr) * 13 + 13-hand.IndexOf(kar, 0, hand.Length);
+                        p++;
+                    }
+                    memo.Text += "\r\n " + num;
+                    wr++;
+                }
+            }
         }
-        
-        
+
+
         private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
 
