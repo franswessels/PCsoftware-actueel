@@ -15,36 +15,20 @@ namespace BulkLoop
     public partial class speleditor : Form
     {
         public string filnam;
-//        spelinfo spi = new spelinfo();
+        public byte[] os;
+        deal spel;
         string[] noord = new string[4];
         string[] oost = new string[4];
         string[] zuid = new string[4];
         string[] west = new string[4];
-//        string kv;
+        String refs = "23456789TJQKA";
+
+
 
         public speleditor()
         {
-            kaartspel sp = new kaartspel();
-            //noord[0] = "0000t00000002";
-            //noord[1] = "0000000060000";
-            //noord[2] = "0000008000032";
-            //noord[3] = "0k0j098765000";
-            //oost[0] = "0k00000765000";
-            //oost[1] = "00q0008705402";
-            //oost[2] = "0k00090060000";
-            //oost[3] = "0000000000000";
-            //zuid[0] = "a00j000000030";
-            //zuid[1] = "a00jt00000000";
-            //zuid[2] = "a0qjt00000000";
-            //zuid[3] = "00q0t00000002";
-            //west[0] = "00q0098000400";
-            //west[1] = "0k00090000030";
-            //west[2] = "0000000705400";
-            //west[3] = "a000000000430";
-            //kv = "zwwnnnnnznznwnnwwownozzzozowoonoowzzowznzwooowwnzwoz";
-            //Console.WriteLine(noord[1]);
-            //Console.WriteLine(noord[1][0]);
-            //Console.WriteLine(noord[1][1]);
+            os = new byte[52];
+            spel = new deal();
             InitializeComponent();
         }
 
@@ -59,18 +43,14 @@ namespace BulkLoop
                 memo.Text += "\r\nfilenaam: ";
                 memo.Text += filnam;
 
-                // hallo
                 string line;
-                // dag
                 bool skip = false;
-                int start, stop, num, len, t;
+                int t;
 
                 // Read the file and display it line by line.
                 System.IO.StreamReader file = new System.IO.StreamReader(filnam);
                 while ((line = file.ReadLine()) != null)
                 {
-//                    memo.Text += "\r\n";
-//                    memo.Text += line;
                     if (line[0] == '{') skip = true;
                     //                    if (line[0] == '}') skip = false;
                     if (line[0] == '[' && !skip)
@@ -80,36 +60,39 @@ namespace BulkLoop
                         {
                             t=0; while(line[t] != '"' && t<line.Length) t++; t++;   // vind begin van token
                             String token = geeftoken(line,'"',t);
-                            memo.Text += "\r\n " + token;
                             registreerspelnummer(token); 
                         }
                         if (String.Compare(line, 1, "DEALER ", 0, 7) == 0)
                         {
                             t=0; while(line[t] != '"' && t<line.Length) t++; t++;   // vind begin van token
                             String token = geeftoken(line, '"',t);
-                            memo.Text += "\r\n "+token;
                             registreerstarter(token);
                         }
                         if (String.Compare(line, 1, "VULNERABLE ", 0, 11) == 0)
                         {
                             t=0; while(line[t] != '"' && t<line.Length) t++; t++;   // vind begin van token
                             String token = geeftoken(line, '"',t);
-                            memo.Text += "\r\n " + token;
                             registreerkwetsbaarheid(token);
                         }
                         if (String.Compare(line, 1, "DEAL ", 0, 5) == 0)
                         {
                             t=0; while(line[t] != '"' && t<line.Length) t++; t++;   // vind begin van token
                             String token = geeftoken(line, '"',t);
-                            memo.Text += "\r\n " + token;
                             registreerverdeling(token);
                         }
                     }
                 }
                 file.Close();
             }
+            memo.Text += "\r\n spelnummer: " + spel.BOARD;
+            memo.Text += "\r\n gever:" + spel.DEALER;
+            memo.Text += "\r\n kwetsbaar:" + spel.VULN + "\r\n verdeelstring: \r\n";
+            for (int t = 0; t < 52; t++)
+            {
+                memo.Text += spel.HANDS[t];
+            }
         }
-        String geeftoken(String str, char kar,int start)
+        String geeftoken(String str, char kar, int start)
         {
             int t=start;
             String result = "";
@@ -127,7 +110,7 @@ namespace BulkLoop
                 for (t = 0; t < str.Length; t++)
                     num = 10 * num + (int)(str[t] - '0');
                 memo.Text += "\r\n Spelnummer is " + num;
-//                cond_act.spelnummer = nummer;
+                spel.BOARD = num;
             }
         void registreerstarter(String str)
         {
@@ -139,6 +122,7 @@ namespace BulkLoop
             if (kar == 'S') kar = 2;
             if (kar == 'W') kar = 3;
             memo.Text += "\r\n Dealer is " + kar;
+            spel.DEALER = kar;
             //            cond_act.starter = kar;
             //            actafsp.start = kar;
         }
@@ -148,26 +132,30 @@ namespace BulkLoop
 //    cond_act.ow_kwetsbaar=false;
             if(String.Compare(str,"NONE")==0 ||String.Compare(str,"LOVE")==0 ||String.Compare(str,"-")==0)
             {
-                memo.Text += "\r\nniemand kwetsbaar";
+                memo.Text += "\r\n niemand kwetsbaar";
+                spel.VULN = 0;
             }
 
             if(String.Compare(str,"NS")==0 )
             {
 //                cond_act.nz_kwetsbaar=true;
-                memo.Text += "\r\nNS kwetsbaar";
+                memo.Text += "\r\n NS kwetsbaar";
+                spel.VULN = 1;
             }
 
             if(String.Compare(str,"EW")==0 )
             {
 //                cond_act.ow_kwetsbaar=true;
-                memo.Text += "\r\nEW kwetsbaar";
+                memo.Text += "\r\n EW kwetsbaar";
+                spel.VULN = 2;
             }
 
             if(String.Compare(str,"ALL")==0 ||String.Compare(str,"BOTH")==0)
             {
 //                cond_act.nz_kwetsbaar=true;
 //                cond_act.ow_kwetsbaar=true;
-                memo.Text += "\r\nallen kwetsbaar";
+                memo.Text += "\r\n allen kwetsbaar";
+                spel.VULN = 3;
             }
         }
         void registreerverdeling(String str)
@@ -177,7 +165,7 @@ namespace BulkLoop
             String hand;
             byte sr = (byte)refer.IndexOf(str[0],0,refer.Length);
             int p = 0;
-            memo.Text += "\r\n startrichting is " + sr;
+            memo.Text += "\r\n eerste hand " + sr;
             while (str[p] != ':' && p < 81) p++;
             for(int t=0; t<4; t++)
             {
@@ -189,25 +177,30 @@ namespace BulkLoop
                 }
                 memo.Text += "\r\n test: " + tokens[t];
             }
-            for (int t = 0; t < 4; t++)     // vier windrichtingen
+            for (int t = 0; t < 4; t++)     // vier handen
             {
-                hand = String.Copy(tokens[t]);
-                memo.Text += "\r\n " + hand;
+                hand = String.Copy(tokens[(int)t]);
+//                memo.Text += "\r\n " + hand;
                 p = 0;
-                int wr = 0;
+                int kl = 0;
                 int num = 0;
                 char kar;
-                while(wr < 4)  // vier kleuren
-                {
-                    while (hand[p] != '.' && p < 13)
+
+                    for(p=0; p<hand.Length; p++)
                     {
                         kar = hand[p];
-                        num = num + (4-wr) * 13 + 13-hand.IndexOf(kar, 0, hand.Length);
-                        p++;
+                        if (kar != '.')
+                        {
+                            num = (3 - kl) * 13 + refs.IndexOf(kar, 0, refs.Length);
+//                            memo.Text += "\r\n " + t + p + " " + num;
+                            os[num] = (byte)((t+sr)%4);
+                            spel.HANDS[num] = os[num];
+                        }
+                        else kl++;
                     }
-                    memo.Text += "\r\n " + num;
-                    wr++;
-                }
+
+                 memo.Text += "\r\n";
+                for (p = 0; p < os.Length; p++) memo.Text += os[p];
             }
         }
 
@@ -233,6 +226,39 @@ namespace BulkLoop
             memo.Text += "\r\n karakter: "+ wind.IndexOf("W",0,4);
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
      }
+    public class deal
+    {
+        private int spelnummer=-1;
+        private int gever=-1;
+        private int kwetsbaar=0;
+        private byte[] verdeling = new byte[52];
+
+        public int BOARD
+        {
+            get {return spelnummer;}
+            set {spelnummer = value;}
+        }
+        public int DEALER
+        {
+            get {return gever;}
+            set {gever = value;}
+        }
+        public int VULN
+        {
+            get {return kwetsbaar;}
+            set { kwetsbaar = value;}
+        }
+        public byte[] HANDS
+        {
+            get {return verdeling;}
+            set {verdeling = value;}
+        }   
+    }
 }

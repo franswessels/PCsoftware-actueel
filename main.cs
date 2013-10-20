@@ -17,6 +17,9 @@ namespace BulkLoop
         public main()
         {
             InitializeComponent();
+            spel = new speleditor();
+            usb_linker = new BMm();
+
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -33,17 +36,15 @@ namespace BulkLoop
         {
             if (usb_linker_actief == false)
             {
-                usb_linker = new BMm();
                 usb_linker_actief = true;
                 usb_linker.Show();
             }
         }
 
-        private void openToolStripMenuItem1_Click(object sender, EventArgs e)
+        public void openToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (speleditor_actief == false)
             {
-                spel = new speleditor();
                 speleditor_actief = true;
                 spel.Show();
             }

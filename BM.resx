@@ -126,7 +126,7 @@
     <value>True</value>
   </data>
   <data name="textData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 179</value>
+    <value>424, 250</value>
   </data>
   <data name="textData.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -141,13 +141,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textData.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 243</value>
+    <value>175, 295</value>
   </data>
   <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 192</value>
+    <value>166, 140</value>
   </data>
   <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -162,7 +162,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="iconvandisc.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 269</value>
@@ -186,7 +186,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;iconvandisc.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="bewerkicon.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 351</value>
@@ -210,10 +210,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bewerkicon.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="setkruisje.Location" type="System.Drawing.Point, System.Drawing">
-    <value>506, 243</value>
+    <value>347, 412</value>
   </data>
   <data name="setkruisje.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -234,7 +234,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;setkruisje.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="analyse.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 380</value>
@@ -258,7 +258,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;analyse.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="werpnood.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 26</value>
@@ -282,7 +282,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;werpnood.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="init_imager.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 159</value>
@@ -306,10 +306,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;init_imager.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="clear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>506, 210</value>
+    <value>506, 281</value>
   </data>
   <data name="clear.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -330,7 +330,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;clear.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="toggleLED.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 188</value>
@@ -354,7 +354,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;toggleLED.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="werpwest.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 55</value>
@@ -378,7 +378,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;werpwest.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="werpoost.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 55</value>
@@ -402,7 +402,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;werpoost.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="werpzuid.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 84</value>
@@ -426,6 +426,34 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;werpzuid.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="werpspel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="werpspel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 113</value>
+  </data>
+  <data name="werpspel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="werpspel.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="werpspel.Text" xml:space="preserve">
+    <value>verdeel spel</value>
+  </data>
+  <data name="&gt;&gt;werpspel.Name" xml:space="preserve">
+    <value>werpspel</value>
+  </data>
+  <data name="&gt;&gt;werpspel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;werpspel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;werpspel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

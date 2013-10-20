@@ -23,6 +23,8 @@ namespace BulkLoop
 
         Thread  tXfers;
         bool bRunning       = false;
+        bool uitres;
+        bool inres;
 //        int     value;
         long    inCount;
         int     ep_paar;
@@ -54,6 +56,8 @@ namespace BulkLoop
        int xpos;
        int ypos;
        bool ledaan = false;
+       public String dummy = "2113030311310233321121233020031233113120001022200022";
+       byte[] ooss;
 //       int kaartteller = 0;
 
         public BMm()
@@ -70,7 +74,7 @@ namespace BulkLoop
             pm = new Bitmap(kk.hoogte, kk.breedte);
             pixar = new byte[kk.hoogte, kk.breedte];
             kopie = new byte[kk.hoogte, kk.breedte];
-
+            ooss = new byte[52];
             // Setup the callback routine for updating the UI
             updateUI    = new UpdateUICallback(StatusUpdate);
 
@@ -173,7 +177,7 @@ namespace BulkLoop
 //        }
 
 
-        public void start_thread()
+        public void start_BM_Thread()
         {
             if (!bRunning)
             {
@@ -184,6 +188,8 @@ namespace BulkLoop
                 tXfers.Priority = ThreadPriority.Highest;
                 //Starts the new thread
                 tXfers.Start(); // effectieve start
+                while(!tXfers.IsAlive)
+                tXfers.Join(5000);
             }
         }
         public void stop_thread()
@@ -239,36 +245,25 @@ namespace BulkLoop
 
         public void BM_Thread()
         {
-            int  xferLen = XFERSIZE48;
-            bool bResult = true;
+            int xferLen = XFERSIZE48;
+            uitres = false;
+            inres = false;
 
             if (ep_paar == 26) xferLen = XFERSIZE26;
-//            if (ep_paar == 11) xferLen = XFERSIZE11;
+            //            if (ep_paar == 11) xferLen = XFERSIZE11;
 
             // Loop stops if either an IN or OUT transfer fails
-            for (; bRunning && bResult; )
+//            for (; bRunning && bResult; )
+            while(!uitres)
             {
-                {
-                    //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
-                    bResult = outEndpoint.XferData(ref outData, ref xferLen);
-
-
-                    if (bResult)
-                    {
-                        //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
-                        bResult = inEndpoint.XferData(ref inData, ref xferLen);
-                        inCount = xferLen;
-                    }
-
-                    // Call StatusUpdate() in the main thread
-
-                    Invoke(updateUI);
-                    stop_thread();
-                //kaartteller++;
-                //if (kaartteller < 2) werp(kaartteller);
-                //textData.Text += "\r\nzzz\r\n ";
-                }
-
+                //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
+                uitres = outEndpoint.XferData(ref outData, ref xferLen);
+            }
+            while(!inres)
+            {
+                //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
+                inres = inEndpoint.XferData(ref inData, ref xferLen);
+                inCount = xferLen;
             }
             bRunning = false;
 
@@ -276,6 +271,45 @@ namespace BulkLoop
             Invoke(updateUI);
             stop_thread();
         }
+
+//        public void BM_Thread()
+//        {
+//            int  xferLen = XFERSIZE48;
+//            bool bResult = true;
+
+//            if (ep_paar == 26) xferLen = XFERSIZE26;
+////            if (ep_paar == 11) xferLen = XFERSIZE11;
+
+//            // Loop stops if either an IN or OUT transfer fails
+//            for (; bRunning && bResult; )
+//            {
+//                {
+//                    //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
+//                    bResult = outEndpoint.XferData(ref outData, ref xferLen);
+
+
+//                    if (bResult)
+//                    {
+//                        //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
+//                        bResult = inEndpoint.XferData(ref inData, ref xferLen);
+//                        inCount = xferLen;
+//                    }
+
+//                    // Call StatusUpdate() in the main thread
+
+//                    Invoke(updateUI);
+//                    stop_thread();
+
+//                }
+
+//            }
+//            bRunning = false;
+
+//            // Call StatusUpdate() in the main thread
+//            Invoke(updateUI);
+//            stop_thread();
+//        }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtData.Text = "leeg";
@@ -476,6 +510,39 @@ namespace BulkLoop
             }
             textData.Text += "\r\n";
         }
+        public void WerpThread()
+        {
+            int xferLen = XFERSIZE48;
+            bool bResult = true;
+
+            // Loop stops if either an IN or OUT transfer fails
+            for (; bRunning && bResult; )
+            {
+                {
+                    //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
+                    bResult = outEndpoint.XferData(ref outData, ref xferLen);
+
+
+                    if (bResult)
+                    {
+                        //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
+                        bResult = inEndpoint.XferData(ref inData, ref xferLen);
+                        inCount = xferLen;
+                    }
+
+                    // Call StatusUpdate() in the main thread
+
+                    Invoke(updateUI);
+                    stop_thread();
+                }
+
+            }
+            bRunning = false;
+
+            // Call StatusUpdate() in the main thread
+            Invoke(updateUI);
+            stop_thread();
+        }
 
         public void werp(int wr)
         {
@@ -485,18 +552,21 @@ namespace BulkLoop
             outData[1] = (byte)wr;
             outData[2] = 3;
             display_output(3);
+            Refresh();
             setendpoint();
-            start_thread();
+            bRunning = true;
+            tXfers = new Thread(new ThreadStart(WerpThread));
+            tXfers.Priority = ThreadPriority.Highest;
+            //Starts the new thread
+            tXfers.Start(); // effectieve start
+            //while (!tXfers.IsAlive);
+            //Thread.Sleep(1000);
+            // textData.Text += "\r\n toggle leeft weer";
+            //Thread.Sleep(1000);
+            // textData.Text += "\r\n toggle nog een keer";
+            // display_output(3);
 
         }
-        private void werpnood_Click(object sender, EventArgs e)
-        {
-
-            textData.Text += "\r\nBMcommando via koppel 48\r\n ";
-            werp(cc.NOORD);
-
-        }
-
 
         private void init_imager_Click(object sender, EventArgs e)
         {
@@ -508,7 +578,7 @@ namespace BulkLoop
             outData[2] = 3;
             display_output(3); 
             setendpoint();
-            start_thread();
+            start_BM_Thread();
 
         }
 
@@ -516,10 +586,9 @@ namespace BulkLoop
         {
             textData.Text = "leeg";
         }
-
-        private void toggleLED_Click(object sender, EventArgs e)
+        public void toggle()
         {
-            textData.Text += "toggle LED via koppel 48\r\n";
+//            textData.Text += "toggle LED via koppel 48\r\n";
             inCount = 0;
             ep_paar = 48;
             if(ledaan) outData[0] = 101; else outData[0]=100;
@@ -527,8 +596,36 @@ namespace BulkLoop
             outData[1] = 5;
             outData[2] = 5;
             display_output(3);
+            Refresh();
             setendpoint();
-            start_thread();
+            start_BM_Thread();  // creëert een USB-thread en start die
+        }
+        private void werpspel_Click(object sender, EventArgs e)
+        {
+            textData.Text += "\r\n speldummy ";
+            for (int t = 0; t < 52; t++)
+                ooss[t] = (byte)(dummy[t] - '0');
+            for (int t = 0; t < 52; t++) textData.Text += ooss[t];
+            textData.Text += "\r\n start";
+            toggle();
+if(uitres)textData.Text += "\r\n uitres ok";
+else textData.Text += "\r\n uitres fout";
+//            for(int t=0; t<10000; t++)
+//            toggle();
+if (inres)textData.Text += "\r\n inres ok";
+else textData.Text += "\r\n inres fout";            
+        }
+
+        private void toggleLED_Click(object sender, EventArgs e)
+        {
+            toggle();
+        }
+
+        private void werpnood_Click(object sender, EventArgs e)
+        {
+
+            textData.Text += "\r\nBMcommando via koppel 48\r\n ";
+            werp(cc.NOORD);
 
         }
 
@@ -557,5 +654,6 @@ namespace BulkLoop
         {
 
         }
+
    }
 }

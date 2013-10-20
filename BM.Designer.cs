@@ -43,6 +43,7 @@ namespace BulkLoop
             this.werpwest = new System.Windows.Forms.Button();
             this.werpoost = new System.Windows.Forms.Button();
             this.werpzuid = new System.Windows.Forms.Button();
+            this.werpspel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,9 +110,10 @@ namespace BulkLoop
             // 
             // toggleLED
             // 
+            this.toggleLED.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.toggleLED, "toggleLED");
             this.toggleLED.Name = "toggleLED";
-            this.toggleLED.UseVisualStyleBackColor = true;
+            this.toggleLED.UseVisualStyleBackColor = false;
             this.toggleLED.Click += new System.EventHandler(this.toggleLED_Click);
             // 
             // werpwest
@@ -135,10 +137,18 @@ namespace BulkLoop
             this.werpzuid.UseVisualStyleBackColor = true;
             this.werpzuid.Click += new System.EventHandler(this.werpzuid_Click);
             // 
+            // werpspel
+            // 
+            resources.ApplyResources(this.werpspel, "werpspel");
+            this.werpspel.Name = "werpspel";
+            this.werpspel.UseVisualStyleBackColor = true;
+            this.werpspel.Click += new System.EventHandler(this.werpspel_Click);
+            // 
             // BMm
             // 
             resources.ApplyResources(this, "$this");
             this.ControlBox = false;
+            this.Controls.Add(this.werpspel);
             this.Controls.Add(this.werpzuid);
             this.Controls.Add(this.werpoost);
             this.Controls.Add(this.werpwest);
@@ -183,6 +193,7 @@ namespace BulkLoop
         private System.Windows.Forms.Button werpwest;
         private System.Windows.Forms.Button werpoost;
         private System.Windows.Forms.Button werpzuid;
+        private System.Windows.Forms.Button werpspel;
     }
 }
 
