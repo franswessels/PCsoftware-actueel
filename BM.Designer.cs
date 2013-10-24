@@ -44,6 +44,7 @@ namespace BulkLoop
             this.werpoost = new System.Windows.Forms.Button();
             this.werpzuid = new System.Windows.Forms.Button();
             this.werpspel = new System.Windows.Forms.Button();
+            this.thread_test = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,10 +145,18 @@ namespace BulkLoop
             this.werpspel.UseVisualStyleBackColor = true;
             this.werpspel.Click += new System.EventHandler(this.werpspel_Click);
             // 
+            // thread_test
+            // 
+            resources.ApplyResources(this.thread_test, "thread_test");
+            this.thread_test.Name = "thread_test";
+            this.thread_test.UseVisualStyleBackColor = true;
+            this.thread_test.Click += new System.EventHandler(this.thread_test_Click);
+            // 
             // BMm
             // 
             resources.ApplyResources(this, "$this");
             this.ControlBox = false;
+            this.Controls.Add(this.thread_test);
             this.Controls.Add(this.werpspel);
             this.Controls.Add(this.werpzuid);
             this.Controls.Add(this.werpoost);
@@ -194,6 +203,7 @@ namespace BulkLoop
         private System.Windows.Forms.Button werpoost;
         private System.Windows.Forms.Button werpzuid;
         private System.Windows.Forms.Button werpspel;
+        private System.Windows.Forms.Button thread_test;
     }
 }
 

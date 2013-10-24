@@ -141,7 +141,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textData.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>175, 295</value>
@@ -162,7 +162,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="iconvandisc.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 269</value>
@@ -186,7 +186,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;iconvandisc.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="bewerkicon.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 351</value>
@@ -210,7 +210,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bewerkicon.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="setkruisje.Location" type="System.Drawing.Point, System.Drawing">
     <value>347, 412</value>
@@ -234,7 +234,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;setkruisje.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="analyse.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 380</value>
@@ -258,7 +258,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;analyse.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="werpnood.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 26</value>
@@ -282,7 +282,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;werpnood.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="init_imager.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 159</value>
@@ -306,7 +306,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;init_imager.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="clear.Location" type="System.Drawing.Point, System.Drawing">
     <value>506, 281</value>
@@ -330,7 +330,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;clear.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="toggleLED.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 188</value>
@@ -354,7 +354,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;toggleLED.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="werpwest.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 55</value>
@@ -378,7 +378,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;werpwest.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="werpoost.Location" type="System.Drawing.Point, System.Drawing">
     <value>94, 55</value>
@@ -402,7 +402,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;werpoost.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="werpzuid.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 84</value>
@@ -426,7 +426,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;werpzuid.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="werpspel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -454,6 +454,30 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;werpspel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="thread_test.Location" type="System.Drawing.Point, System.Drawing">
+    <value>484, 329</value>
+  </data>
+  <data name="thread_test.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="thread_test.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="thread_test.Text" xml:space="preserve">
+    <value>test thread</value>
+  </data>
+  <data name="&gt;&gt;thread_test.Name" xml:space="preserve">
+    <value>thread_test</value>
+  </data>
+  <data name="&gt;&gt;thread_test.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;thread_test.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;thread_test.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

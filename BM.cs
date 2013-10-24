@@ -188,8 +188,14 @@ namespace BulkLoop
                 tXfers.Priority = ThreadPriority.Highest;
                 //Starts the new thread
                 tXfers.Start(); // effectieve start
-                while(!tXfers.IsAlive)
-                tXfers.Join(5000);
+                while (!tXfers.IsAlive) ;
+                Thread.Sleep(1);
+                tXfers.Join();
+
+                if (uitres) textData.Text += "\r\n uitres ok";
+                else textData.Text += "\r\n uitres fout";
+                if (inres) textData.Text += "\r\n inres ok";
+                else textData.Text += "\r\n inres fout";
             }
         }
         public void stop_thread()
@@ -216,7 +222,7 @@ namespace BulkLoop
         {
 //// This is the call back function for updating the UI(user interface) 
 //// and is called from TransfersThread.
-            textData.Text += " retour      ";
+            textData.Text += " \r\nretour      ";
 
             if (ep_paar == 11)
                 for (int i = 0; i < inCount; i++)
@@ -243,7 +249,7 @@ namespace BulkLoop
 
         }
 
-        public void BM_Thread()
+        public void BM_Thread()  // TIJDELIJKE VERSIE
         {
             int xferLen = XFERSIZE48;
             uitres = false;
@@ -259,17 +265,21 @@ namespace BulkLoop
                 //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
                 uitres = outEndpoint.XferData(ref outData, ref xferLen);
             }
-            while(!inres)
-            {
-                //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
-                inres = inEndpoint.XferData(ref inData, ref xferLen);
-                inCount = xferLen;
-            }
+
+            //if (uitres)
+            //{
+            //    while (!inres)
+            //    {
+            //        //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
+            //        inres = inEndpoint.XferData(ref inData, ref xferLen);
+            //        inCount = xferLen;
+            //    }
+            //}
             bRunning = false;
 
             // Call StatusUpdate() in the main thread
             Invoke(updateUI);
-            stop_thread();
+//            stop_thread();
         }
 
 //        public void BM_Thread()
@@ -502,7 +512,7 @@ namespace BulkLoop
 
         private void display_output(int nn)
         {
-            textData.Text += "output     ";
+            textData.Text += "\r\nBeoogde output     ";
             for (int i = 0; i < nn; i++)
             { 
                 textData.Text += outData[i].ToString();
@@ -532,8 +542,8 @@ namespace BulkLoop
 
                     // Call StatusUpdate() in the main thread
 
-                    Invoke(updateUI);
-                    stop_thread();
+//                    Invoke(updateUI);
+//                    stop_thread();
                 }
 
             }
@@ -542,30 +552,6 @@ namespace BulkLoop
             // Call StatusUpdate() in the main thread
             Invoke(updateUI);
             stop_thread();
-        }
-
-        public void werp(int wr)
-        {
-            inCount = 0;
-            ep_paar = 48;
-            outData[0] = (byte)cc.UITWERPEN;
-            outData[1] = (byte)wr;
-            outData[2] = 3;
-            display_output(3);
-            Refresh();
-            setendpoint();
-            bRunning = true;
-            tXfers = new Thread(new ThreadStart(WerpThread));
-            tXfers.Priority = ThreadPriority.Highest;
-            //Starts the new thread
-            tXfers.Start(); // effectieve start
-            //while (!tXfers.IsAlive);
-            //Thread.Sleep(1000);
-            // textData.Text += "\r\n toggle leeft weer";
-            //Thread.Sleep(1000);
-            // textData.Text += "\r\n toggle nog een keer";
-            // display_output(3);
-
         }
 
         private void init_imager_Click(object sender, EventArgs e)
@@ -581,6 +567,55 @@ namespace BulkLoop
             start_BM_Thread();
 
         }
+
+        public void werp(int wr)
+        {
+            inCount = 0;
+            ep_paar = 48;
+            bool uitres = false;
+            bool inres = false;
+            int translen = 3;
+            outData[0] = (byte)cc.UITWERPEN;
+            outData[1] = (byte)wr;
+            outData[2] = 3;
+            display_output(3);
+            Refresh();
+            setendpoint();
+            bRunning = true;
+            uitres = outEndpoint.XferData(ref outData, ref translen);
+            if (uitres) textData.Text += "\r\nOutput gelukt";
+            else textData.Text += "\r\n Transfer mislukt";
+            if (uitres)
+            {
+            Thread.Sleep(1000);
+                //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
+                inres = inEndpoint.XferData(ref inData, ref translen);
+                inCount = translen;
+            }
+            if (inres) textData.Text += "\r\nInput was:             ";
+            {
+                for (int i = 0; i <translen; i++)
+                {
+                    textData.Text += inData[i].ToString();
+                    textData.Text += "\t";
+                }
+                textData.Text += "\r\n";
+            }
+            //            tXfers = new Thread(new ThreadStart(WerpThread));
+            //            tXfers.Priority = ThreadPriority.Highest;
+            //Starts the new thread
+            //            tXfers.Start(); // effectieve start
+            //            while (!tXfers.IsAlive) ;
+            //            Thread.Sleep(5000);
+            //            tXfers.Join();
+            //             textData.Text += "\r\n WerpThread getart";
+            //             tXfers.Join();
+            //Thread.Sleep(1000);
+            // textData.Text += "\r\n toggle nog een keer";
+            // display_output(3);
+
+        }
+
 
         private void clear_Click(object sender, EventArgs e)
         {
@@ -598,22 +633,24 @@ namespace BulkLoop
             display_output(3);
             Refresh();
             setendpoint();
-            start_BM_Thread();  // creëert een USB-thread en start die
+            bRunning = true;
+            //creates new thread
+            tXfers = new Thread(new ThreadStart(WerpThread));
+            tXfers.Priority = ThreadPriority.Highest;
+            //Starts the new thread
+            tXfers.Start(); // effectieve start
+            while (!tXfers.IsAlive) ;
+            Thread.Sleep(1);
+//            tXfers.Join();
         }
         private void werpspel_Click(object sender, EventArgs e)
         {
-            textData.Text += "\r\n speldummy ";
+            textData.Text += "\r\nDummyspel:   ";
             for (int t = 0; t < 52; t++)
                 ooss[t] = (byte)(dummy[t] - '0');
             for (int t = 0; t < 52; t++) textData.Text += ooss[t];
-            textData.Text += "\r\n start";
-            toggle();
-if(uitres)textData.Text += "\r\n uitres ok";
-else textData.Text += "\r\n uitres fout";
-//            for(int t=0; t<10000; t++)
-//            toggle();
-if (inres)textData.Text += "\r\n inres ok";
-else textData.Text += "\r\n inres fout";            
+//            textData.Text += "\r\n start";
+            werp(2); // zuid als voorbeeld 
         }
 
         private void toggleLED_Click(object sender, EventArgs e)
@@ -655,5 +692,77 @@ else textData.Text += "\r\n inres fout";
 
         }
 
-   }
+        private void thread_test_Click(object sender, EventArgs e)
+        {
+            test();
+        }
+
+
+/// <summary>
+/// ////////////////////////////////////////////////////////////////////////////////////////////
+/// ////////////////////////// testruimte voor threading ///////////////////////////////////////
+/// ////////////////////////////////////////////////////////////////////////////////////////////
+/// </summary>
+
+    //public class Simple
+    //{
+    public void test()
+    {
+            textData.Text += "Thread Start/Stop/Join Sample";
+
+            Alpha oAlpha = new Alpha();
+
+    //        // Create the thread object, passing in the Alpha.Beta method
+    //        // via a ThreadStart delegate. This does not start the thread.
+            Thread oThread = new Thread(new ThreadStart(oAlpha.Beta));
+
+    //        // Start the thread
+            oThread.Start();
+
+    //        // Spin for a while waiting for the started thread to become
+    //        // alive:
+            while (!oThread.IsAlive) ;
+
+    //        // Put the Main thread to sleep for 1 millisecond to allow oThread
+    //        // to do some work:
+            Thread.Sleep(1);
+
+    //        // Request that oThread be stopped
+//            oThread.Abort();
+
+    //        // Wait until oThread finishes. Join also has overloads
+    //        // that take a millisecond interval or a TimeSpan object.
+            oThread.Join();
+
+            Console.WriteLine();
+            Console.WriteLine("Alpha.Beta has finished");
+
+            //try
+            //{
+            //    Console.WriteLine("Try to restart the Alpha.Beta thread");
+            //    oThread.Start();
+            //}
+            //catch (ThreadStateException)
+            //{
+            //    Console.Write("ThreadStateException trying to restart Alpha.Beta. ");
+            //    Console.WriteLine("Expected since aborted threads cannot be restarted.");
+            //}
+    //        return 0;
+        }
+    }
+
+    public class Alpha
+    {
+
+        // This method that will be called when the thread is started
+        public void Beta()
+        {
+//            while (true)
+            for(int t=0; t<3; t++)
+            {
+                Console.WriteLine("Alpha.Beta is running in its own thread.");
+            }
+        }
+    }
+
 }
