@@ -570,6 +570,7 @@ namespace BulkLoop
 
         public void werp(int wr)
         {
+            // test wijziging
             inCount = 0;
             ep_paar = 48;
             bool uitres = false;
