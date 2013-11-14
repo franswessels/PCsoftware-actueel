@@ -126,7 +126,7 @@
     <value>True</value>
   </data>
   <data name="textData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 250</value>
+    <value>424, 506</value>
   </data>
   <data name="textData.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -144,7 +144,7 @@
     <value>14</value>
   </data>
   <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 295</value>
+    <value>161, 551</value>
   </data>
   <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>166, 140</value>
@@ -213,7 +213,7 @@
     <value>11</value>
   </data>
   <data name="setkruisje.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 412</value>
+    <value>333, 668</value>
   </data>
   <data name="setkruisje.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -309,7 +309,7 @@
     <value>7</value>
   </data>
   <data name="clear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>506, 281</value>
+    <value>492, 537</value>
   </data>
   <data name="clear.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -457,7 +457,7 @@
     <value>1</value>
   </data>
   <data name="thread_test.Location" type="System.Drawing.Point, System.Drawing">
-    <value>484, 329</value>
+    <value>470, 585</value>
   </data>
   <data name="thread_test.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -484,7 +484,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>623, 495</value>
+    <value>623, 703</value>
   </data>
   <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
     <value>800, 800</value>

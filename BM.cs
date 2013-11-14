@@ -568,60 +568,6 @@ namespace BulkLoop
 
         }
 
-        public void werp(int wr)
-        {
-            // test wijziging
-            inCount = 0;
-            ep_paar = 48;
-            bool uitres = false;
-            bool inres = false;
-            int translen = 3;
-            outData[0] = (byte)cc.UITWERPEN;
-            outData[1] = (byte)wr;
-            outData[2] = 3;
-            display_output(3);
-            Refresh();
-            setendpoint();
-            bRunning = true;
-            uitres = outEndpoint.XferData(ref outData, ref translen);
-            if (uitres) textData.Text += "\r\nOutput gelukt";
-            else textData.Text += "\r\n Transfer mislukt";
-            if (uitres)
-            {
-            Thread.Sleep(1000);
-                //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
-                inres = inEndpoint.XferData(ref inData, ref translen);
-                inCount = translen;
-            }
-            if (inres) textData.Text += "\r\nInput was:             ";
-            {
-                for (int i = 0; i <translen; i++)
-                {
-                    textData.Text += inData[i].ToString();
-                    textData.Text += "\t";
-                }
-                textData.Text += "\r\n";
-            }
-            //            tXfers = new Thread(new ThreadStart(WerpThread));
-            //            tXfers.Priority = ThreadPriority.Highest;
-            //Starts the new thread
-            //            tXfers.Start(); // effectieve start
-            //            while (!tXfers.IsAlive) ;
-            //            Thread.Sleep(5000);
-            //            tXfers.Join();
-            //             textData.Text += "\r\n WerpThread getart";
-            //             tXfers.Join();
-            //Thread.Sleep(1000);
-            // textData.Text += "\r\n toggle nog een keer";
-            // display_output(3);
-
-        }
-
-
-        private void clear_Click(object sender, EventArgs e)
-        {
-            textData.Text = "leeg";
-        }
         public void toggle()
         {
 //            textData.Text += "toggle LED via koppel 48\r\n";
@@ -644,14 +590,74 @@ namespace BulkLoop
             Thread.Sleep(1);
 //            tXfers.Join();
         }
+
+        public void werp(byte num, int wr)
+        {
+            inCount = 0;
+            ep_paar = 48;
+            bool uitres = false;
+            bool inres = false;
+            int translen = 3;
+            outData[0] = (byte)cc.UITWERPEN;
+            outData[1] = (byte)wr;
+            outData[2] = num;
+            display_output(3);
+            Refresh();
+            setendpoint();
+            bRunning = true;
+            uitres = outEndpoint.XferData(ref outData, ref translen);
+            if (uitres) textData.Text += "\r\nOutput gelukt";
+            else textData.Text += "\r\n Transfer mislukt";
+            if (uitres)
+            {
+//            Thread.Sleep(2000);
+                //calls the XferData function for bulk transfer(OUT/IN) in the cyusb.dll
+                inres = inEndpoint.XferData(ref inData, ref translen);
+//                inCount = translen;
+            }
+
+            if (inres) textData.Text += "\r\nInput was:             ";
+            {
+                for (int i = 0; i <translen; i++)
+                {
+                    textData.Text += inData[i].ToString();
+                    textData.Text += "\t";
+                }
+                textData.Text += "\r\n";
+            }
+
+            //            tXfers = new Thread(new ThreadStart(WerpThread));
+            //            tXfers.Priority = ThreadPriority.Highest;
+            //Starts the new thread
+            //            tXfers.Start(); // effectieve start
+            //            while (!tXfers.IsAlive) ;
+            //            Thread.Sleep(5000);
+            //            tXfers.Join();
+            //             textData.Text += "\r\n WerpThread getart";
+            //             tXfers.Join();
+            //Thread.Sleep(1000);
+            // textData.Text += "\r\n toggle nog een keer";
+            // display_output(3);
+        }
+
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            textData.Text = "leeg";
+        }
         private void werpspel_Click(object sender, EventArgs e)
         {
             textData.Text += "\r\nDummyspel:   ";
             for (int t = 0; t < 52; t++)
+            {
                 ooss[t] = (byte)(dummy[t] - '0');
-            for (int t = 0; t < 52; t++) textData.Text += ooss[t];
-//            textData.Text += "\r\n start";
-            werp(2); // zuid als voorbeeld 
+                textData.Text += ooss[t];
+            }
+            for (byte t = 0; t < 4; t++)
+            {
+                werp(t, ooss[t]); // zuid als voorbeeld 
+                Thread.Sleep(1000);
+            }
         }
 
         private void toggleLED_Click(object sender, EventArgs e)
@@ -663,28 +669,28 @@ namespace BulkLoop
         {
 
             textData.Text += "\r\nBMcommando via koppel 48\r\n ";
-            werp(cc.NOORD);
+            werp(0,cc.NOORD);
 
         }
 
         private void werpwest_Click(object sender, EventArgs e)
         {
             textData.Text += "\r\nBMcommando via koppel 48\r\n ";
-            werp(cc.WEST);
+            werp(0,cc.WEST);
 
         }
 
         private void werpoost_Click(object sender, EventArgs e)
         {
             textData.Text += "\r\nBMcommando via koppel 48\r\n ";
-            werp(cc.OOST);
+            werp(0,cc.OOST);
 
         }
 
         private void werpzuid_Click(object sender, EventArgs e)
         {
             textData.Text += "\r\nBMcommando via koppel 48\r\n ";
-            werp(cc.ZUID);
+            werp(0,cc.ZUID);
 
         }
 
